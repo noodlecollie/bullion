@@ -1,0 +1,21 @@
+{
+	"name": "net.wzl.bullion",
+	"version": "0.1.0",
+	"description": "GoldSrc engine reimplementation in Unity",
+	"displayName": "Bullion Engine",
+	"unity": "2022.3",
+	"author":
+	{
+		"name": "NoodleCollie",
+		"url": "https://github.com/noodlecollie"
+	},
+	"dependencies":
+	{
+		"com.unity.netcode.gameobjects": "1.5.1"
+	},
+	"keywords":
+	[
+		"goldsrc",
+		"halflife"
+	]
+}
