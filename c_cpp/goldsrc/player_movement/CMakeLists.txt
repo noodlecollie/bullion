@@ -1,36 +1,80 @@
-set(PUBLIC_HEADERS_LIST
-	${CMAKE_CURRENT_SOURCE_DIR}/include/steam/steamtypes.h
-	${CMAKE_CURRENT_SOURCE_DIR}/include/archtypes.h
-	${CMAKE_CURRENT_SOURCE_DIR}/include/pm_debug.h
-	${CMAKE_CURRENT_SOURCE_DIR}/include/pm_defs.h
-	${CMAKE_CURRENT_SOURCE_DIR}/include/pm_info.h
-	${CMAKE_CURRENT_SOURCE_DIR}/include/pm_materials.h
-	${CMAKE_CURRENT_SOURCE_DIR}/include/pm_movevars.h
-	${CMAKE_CURRENT_SOURCE_DIR}/include/pm_shared.h
-	${CMAKE_CURRENT_SOURCE_DIR}/include/pmtrace.h
-	${CMAKE_CURRENT_SOURCE_DIR}/include/usercmd.h
+set(SOURCES
+	include/steam/steamtypes.h
+	include/archtypes.h
+	include/pm_debug.h
+	include/pm_defs.h
+	include/pm_info.h
+	include/pm_materials.h
+	include/pm_movevars.h
+	include/pm_shared.h
+	include/pmtrace.h
+	include/usercmd.h
+
+	src/const.h
+	src/in_buttons.h
+	src/mathlib.h
+	src/pm_debug.c
+	src/pm_math.c
+	src/pm_shared.c
+
 )
 
-set(SOURCES_LIST
-	${CMAKE_CURRENT_SOURCE_DIR}/src/const.h
-	${CMAKE_CURRENT_SOURCE_DIR}/src/in_buttons.h
-	${CMAKE_CURRENT_SOURCE_DIR}/src/mathlib.h
-	${CMAKE_CURRENT_SOURCE_DIR}/src/pm_debug.c
-	${CMAKE_CURRENT_SOURCE_DIR}/src/pm_math.c
-	${CMAKE_CURRENT_SOURCE_DIR}/src/pm_shared.c
+# Static target
+
+set(GOLDSRC_PM_SHARED_LIBRARY NO)
+configure_file(configure/pm_export.h.in ${CMAKE_CURRENT_BINARY_DIR}/generated_headers_static/pm_export.h)
+
+add_library(${TARGETNAME_LIB_GOLDSRC_PLAYER_MOVEMENT}_Static STATIC
+	${SOURCES}
+	${CMAKE_CURRENT_BINARY_DIR}/generated_headers_static/pm_export.h
 )
 
-set(CONFIGURE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/configure)
+target_include_directories(${TARGETNAME_LIB_GOLDSRC_PLAYER_MOVEMENT}_Static
+	PUBLIC
+	include
+	${CMAKE_CURRENT_BINARY_DIR}/generated_headers_static
 
-set(PUBLIC_INCLUDE_DIRS
-	${CMAKE_CURRENT_SOURCE_DIR}/include
+	PRIVATE
+	src
 )
 
-set(PRIVATE_INCLUDE_DIRS
-	${CMAKE_CURRENT_SOURCE_DIR}/src
+install(TARGETS ${TARGETNAME_LIB_GOLDSRC_PLAYER_MOVEMENT}_Static
+	ARCHIVE DESTINATION ${INSTALL_CATEGORY_LIB_GOLDSRC}/${TARGETNAME_LIB_GOLDSRC_PLAYER_MOVEMENT}_Static/lib
+	LIBRARY DESTINATION ${INSTALL_CATEGORY_LIB_GOLDSRC}/${TARGETNAME_LIB_GOLDSRC_PLAYER_MOVEMENT}_Static/lib
+	RUNTIME DESTINATION ${INSTALL_CATEGORY_LIB_GOLDSRC}/${TARGETNAME_LIB_GOLDSRC_PLAYER_MOVEMENT}_Static/bin
 )
 
-add_compile_definitions(GOLDSRC_PLAYER_MOVEMENT_PRODUCER)
+install(DIRECTORY include DESTINATION ${INSTALL_CATEGORY_LIB_GOLDSRC}/${TARGETNAME_LIB_GOLDSRC_PLAYER_MOVEMENT}_Static)
+install(
+	FILES ${CMAKE_CURRENT_BINARY_DIR}/generated_headers_static/pm_export.h
+	DESTINATION ${INSTALL_CATEGORY_LIB_GOLDSRC}/${TARGETNAME_LIB_GOLDSRC_PLAYER_MOVEMENT}_Static/include)
 
-add_subdirectory(target_static)
-add_subdirectory(target_shared)
+# Shared target
+
+set(GOLDSRC_PM_SHARED_LIBRARY YES)
+configure_file(configure/pm_export.h.in ${CMAKE_CURRENT_BINARY_DIR}/generated_headers_shared/pm_export.h)
+
+add_library(${TARGETNAME_LIB_GOLDSRC_PLAYER_MOVEMENT} SHARED
+	${SOURCES}
+	${CMAKE_CURRENT_BINARY_DIR}/generated_headers_shared/pm_export.h
+)
+
+target_include_directories(${TARGETNAME_LIB_GOLDSRC_PLAYER_MOVEMENT}
+	PUBLIC
+	include
+	${CMAKE_CURRENT_BINARY_DIR}/generated_headers_shared
+
+	PRIVATE
+	src
+)
+
+install(TARGETS ${TARGETNAME_LIB_GOLDSRC_PLAYER_MOVEMENT}
+	ARCHIVE DESTINATION ${INSTALL_CATEGORY_LIB_GOLDSRC}/${TARGETNAME_LIB_GOLDSRC_PLAYER_MOVEMENT}/lib
+	LIBRARY DESTINATION ${INSTALL_CATEGORY_LIB_GOLDSRC}/${TARGETNAME_LIB_GOLDSRC_PLAYER_MOVEMENT}/lib
+	RUNTIME DESTINATION ${INSTALL_CATEGORY_LIB_GOLDSRC}/${TARGETNAME_LIB_GOLDSRC_PLAYER_MOVEMENT}/bin
+)
+
+install(DIRECTORY include DESTINATION ${INSTALL_CATEGORY_LIB_GOLDSRC}/${TARGETNAME_LIB_GOLDSRC_PLAYER_MOVEMENT})
+install(
+	FILES ${CMAKE_CURRENT_BINARY_DIR}/generated_headers_shared/pm_export.h
+	DESTINATION ${INSTALL_CATEGORY_LIB_GOLDSRC}/${TARGETNAME_LIB_GOLDSRC_PLAYER_MOVEMENT}/include)
