@@ -1,0 +1,43 @@
+#ifndef PM_EXPORT_H
+#define PM_EXPORT_H
+
+// Defined if this target is a shared library
+#cmakedefine GOLDSRC_PM_SHARED_LIBRARY
+
+#ifdef __cplusplus
+// C++ needs extern C annotation
+#define GOLDSRC_PM_EXTERNC extern "C"
+#else
+// C does not need this annotation
+#define GOLDSRC_PM_EXTERNC
+#endif // __cplusplus
+
+#ifdef _WIN32
+// Windows supports specifying the cdecl calling convention
+#define GOLDSRC_PM_CDECL __cdecl
+
+#ifdef GOLDSRC_PM_SHARED_LIBRARY
+
+#ifdef GOLDSRC_PLAYER_MOVEMENT_PRODUCER
+// Shared library is being built, so mark functions for export
+#define GOLDSRC_PM_API __declspec(dllexport)
+#else
+// Shared library is being used, so mark functions for import
+#define GOLDSRC_PM_API __declspec(dllimport)
+#endif // GOLDSRC_PLAYER_MOVEMENT_PRODUCER
+
+#else
+// Library is static, so functions do not need import/export annotations
+#define GOLDSRC_PM_API
+#endif // GOLDSRC_PM_SHARED_LIBRARY
+
+#else
+// Not on Windows, so these are not required.
+#define GOLDSRC_PM_CDECL
+#define GOLDSRC_PM_API
+#endif // _WIN32
+
+// Now combine all of these switches into a macro that exposes a function in the library's public API:
+#define GOLDSRC_PM_PUBLIC(returnType) GOLDSRC_PM_EXTERNC GOLDSRC_PM_API returnType GOLDSRC_PM_CDECL
+
+#endif // PM_EXPORT_H
