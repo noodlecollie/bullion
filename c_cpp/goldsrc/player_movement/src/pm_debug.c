@@ -41,7 +41,7 @@ static int PM_boxpnt[6][4] =
 	{ 7, 6, 4, 5 }, // -Z
 };
 
-GOLDSRC_PM_PUBLIC(void) PM_ShowClipBox( void )
+GOLDSRC_PLAYERMOVEMENT_PUBLIC(void) PM_ShowClipBox( void )
 {
 #if defined( _DEBUG )
 	vec3_t org;
@@ -96,7 +96,7 @@ PM_ParticleLine(vec3_t start, vec3_t end, int color, float life)
 
 ================
 */
-GOLDSRC_PM_PUBLIC(void) PM_ParticleLine(vec3_t start, vec3_t end, int pcolor, float life, float vert)
+GOLDSRC_PLAYERMOVEMENT_PUBLIC(void) PM_ParticleLine(vec3_t start, vec3_t end, int pcolor, float life, float vert)
 {
 	float linestep = 2.0f;
 	float curdist;
@@ -232,7 +232,7 @@ PM_DrawBBox(vec3_t mins, vec3_t maxs, vec3_t origin, int pcolor, float life)
 
 ================
 */
-GOLDSRC_PM_PUBLIC(void) PM_DrawBBox(vec3_t mins, vec3_t maxs, vec3_t origin, int pcolor, float life)
+GOLDSRC_PLAYERMOVEMENT_PUBLIC(void) PM_DrawBBox(vec3_t mins, vec3_t maxs, vec3_t origin, int pcolor, float life)
 {
 	int j;
 
@@ -274,7 +274,7 @@ Shows particles at that entities bbox
 Tries to shoot a ray out by about 128 units.
 ================
 */
-GOLDSRC_PM_PUBLIC(void) PM_ViewEntity( void )
+GOLDSRC_PLAYERMOVEMENT_PUBLIC(void) PM_ViewEntity( void )
 {
 	vec3_t forward, right, up;
 	float raydist = 256.0f;

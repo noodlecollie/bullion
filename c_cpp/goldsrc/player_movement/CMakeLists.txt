@@ -1,3 +1,6 @@
+include(export_header_template)
+generate_export_header_template(${TARGETNAME_LIB_GOLDSRC_PLAYER_MOVEMENT} ${CMAKE_CURRENT_BINARY_DIR}/pm_export.h.in)
+
 set(SOURCES
 	include/steam/steamtypes.h
 	include/archtypes.h
@@ -21,8 +24,8 @@ set(SOURCES
 
 # Static target
 
-set(GOLDSRC_PM_SHARED_LIBRARY NO)
-configure_file(configure/pm_export.h.in ${CMAKE_CURRENT_BINARY_DIR}/generated_headers_static/pm_export.h)
+set(GOLDSRC_PLAYERMOVEMENT_SHARED_LIBRARY NO)
+configure_file(${CMAKE_CURRENT_BINARY_DIR}/pm_export.h.in ${CMAKE_CURRENT_BINARY_DIR}/generated_headers_static/pm_export.h)
 
 add_library(${TARGETNAME_LIB_GOLDSRC_PLAYER_MOVEMENT}_Static STATIC
 	${SOURCES}
@@ -51,8 +54,8 @@ install(
 
 # Shared target
 
-set(GOLDSRC_PM_SHARED_LIBRARY YES)
-configure_file(configure/pm_export.h.in ${CMAKE_CURRENT_BINARY_DIR}/generated_headers_shared/pm_export.h)
+set(GOLDSRC_PLAYERMOVEMENT_SHARED_LIBRARY YES)
+configure_file(${CMAKE_CURRENT_BINARY_DIR}/pm_export.h.in ${CMAKE_CURRENT_BINARY_DIR}/generated_headers_shared/pm_export.h)
 
 add_library(${TARGETNAME_LIB_GOLDSRC_PLAYER_MOVEMENT} SHARED
 	${SOURCES}

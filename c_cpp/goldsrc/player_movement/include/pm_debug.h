@@ -20,9 +20,9 @@
 
 #include "pm_export.h"
 
-GOLDSRC_PM_PUBLIC(void) PM_ViewEntity( void );
-GOLDSRC_PM_PUBLIC(void) PM_DrawBBox(vec3_t mins, vec3_t maxs, vec3_t origin, int pcolor, float life);
-GOLDSRC_PM_PUBLIC(void) PM_ParticleLine(vec3_t start, vec3_t end, int pcolor, float life, float vert);
-GOLDSRC_PM_PUBLIC(void) PM_ShowClipBox( void );
+GOLDSRC_PLAYERMOVEMENT_PUBLIC(void) PM_ViewEntity( void );
+GOLDSRC_PLAYERMOVEMENT_PUBLIC(void) PM_DrawBBox(vec3_t mins, vec3_t maxs, vec3_t origin, int pcolor, float life);
+GOLDSRC_PLAYERMOVEMENT_PUBLIC(void) PM_ParticleLine(vec3_t start, vec3_t end, int pcolor, float life, float vert);
+GOLDSRC_PLAYERMOVEMENT_PUBLIC(void) PM_ShowClipBox( void );
 
 #endif // PMOVEDBG_H

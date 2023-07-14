@@ -263,7 +263,7 @@ void PM_InitTextureTypes()
 	bTextureTypeInit = true;
 }
 
-GOLDSRC_PM_PUBLIC(char) PM_FindTextureType( char *name )
+GOLDSRC_PLAYERMOVEMENT_PUBLIC(char) PM_FindTextureType( char *name )
 {
 	int left, right, pivot;
 	int val;
@@ -3317,7 +3317,7 @@ invoked by each side as appropriate.  There should be no distinction, internally
 and client.  This will ensure that prediction behaves appropriately.
 */
 
-GOLDSRC_PM_PUBLIC(void) PM_Move ( struct playermove_s *ppmove, int server )
+GOLDSRC_PLAYERMOVEMENT_PUBLIC(void) PM_Move ( struct playermove_s *ppmove, int server )
 {
 	assert( pm_shared_initialized );
 
@@ -3359,7 +3359,7 @@ int PM_GetPhysEntInfo( int ent )
 	return -1;
 }
 
-GOLDSRC_PM_PUBLIC(void) PM_Init( struct playermove_s *ppmove )
+GOLDSRC_PLAYERMOVEMENT_PUBLIC(void) PM_Init( struct playermove_s *ppmove )
 {
 	assert( !pm_shared_initialized );
 
