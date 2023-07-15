@@ -9,10 +9,10 @@
 #if !defined( PM_MOVEVARSH )
 #define PM_MOVEVARSH
 
-// movevars_t                  // Physics variables.
-typedef struct movevars_s movevars_t;
+// pmmovevars_t                  // Physics variables.
+typedef struct pmmovevars_s pmmovevars_t;
 
-struct movevars_s
+struct pmmovevars_s
 {
 	float	gravity;           // Gravity for map
 	float	stopspeed;         // Deceleration when not moving
@@ -42,6 +42,6 @@ struct movevars_s
 	float	skyvec_z;			//
 };
 
-extern movevars_t movevars;
+extern pmmovevars_t movevars;
 
 #endif

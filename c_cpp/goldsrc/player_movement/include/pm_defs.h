@@ -17,7 +17,6 @@
 #define PM_DEFSH
 #pragma once
 
-#include "archtypes.h"     // DAL
 #define	MAX_PHYSENTS 600 		  // Must have room for all entities in the world.
 #define MAX_MOVEENTS 64
 #define	MAX_CLIP_PLANES	5
@@ -38,16 +37,18 @@
 // PM_PlayerTrace results.
 #include "pmtrace.h"
 
-struct hull_s;
+struct pmhull_s;
+struct pmmodel_s;
+struct pmmovevars_s;
 
-// physent_t
-typedef struct physent_s
+// pmphysent_t
+typedef struct pmphysent_s
 {
 	char			name[32];             // Name of model, or "player" or "world".
 	int				player;
 	pmvec3_t			origin;               // Model's origin in world coordinates.
-	struct model_s	*model;		          // only for bsp models
-	struct model_s	*studiomodel;         // SOLID_BBOX, but studio clip intersections.
+	struct pmmodel_s	*model;		          // only for bsp models
+	struct pmmodel_s	*studiomodel;         // SOLID_BBOX, but studio clip intersections.
 	pmvec3_t			mins, maxs;	          // only for non-bsp models
 	int				info;		          // For client or server to use to identify (index into edicts or cl_entities)
 	pmvec3_t			angles;               // rotated entities need this info for hull testing to work.
@@ -81,9 +82,9 @@ typedef struct physent_s
 	pmvec3_t			vuser2;
 	pmvec3_t			vuser3;
 	pmvec3_t			vuser4;
-} physent_t;
+} pmphysent_t;
 
-typedef struct usercmd_s
+typedef struct pmusercmd_s
 {
 	short	lerp_msec;      // Interpolation time on client
 	pmbyte	msec;           // Duration in ms of command
@@ -101,9 +102,9 @@ typedef struct usercmd_s
 // Experimental player impact stuff.
 	int		impact_index;
 	pmvec3_t	impact_position;
-} usercmd_t;
+} pmusercmd_t;
 
-typedef struct playermove_s
+typedef struct pmplayermove_s
 {
 	int				player_index;  // So we don't try to run the PM_CheckStuck nudging too quickly.
 	pmboolean		server;        // For debugging, are we running physics code on server side?
@@ -177,18 +178,18 @@ typedef struct playermove_s
 	// world state
 	// Number of entities to clip against.
 	int				numphysent;
-	physent_t		physents[MAX_PHYSENTS];
+	pmphysent_t		physents[MAX_PHYSENTS];
 	// Number of momvement entities (ladders)
 	int				nummoveent;
 	// just a list of ladders
-	physent_t		moveents[MAX_MOVEENTS];
+	pmphysent_t		moveents[MAX_MOVEENTS];
 
 	// All things being rendered, for tracing against things you don't actually collide with
 	int				numvisent;
-	physent_t		visents[ MAX_PHYSENTS ];
+	pmphysent_t		visents[ MAX_PHYSENTS ];
 
 	// input to run through physics.
-	usercmd_t		cmd;
+	pmusercmd_t		cmd;
 
 	// Trace results for objects we collided with.
 	int				numtouch;
@@ -196,7 +197,7 @@ typedef struct playermove_s
 
 	char			physinfo[ MAX_PHYSINFO_STRING ]; // Physics info string
 
-	struct movevars_s *movevars;
+	struct pmmovevars_s *movevars;
 	pmvec3_t player_mins[ 4 ];
 	pmvec3_t player_maxs[ 4 ];
 
@@ -211,15 +212,15 @@ typedef struct playermove_s
 	void			(*PM_StuckTouch)( int hitent, pmtrace_t *ptraceresult );
 	int				(*PM_PointContents) (float *p, int *truecontents /*filled in if this is non-null*/ );
 	int				(*PM_TruePointContents) (float *p);
-	int				(*PM_HullPointContents) ( struct hull_s *hull, int num, float *p);
+	int				(*PM_HullPointContents) ( struct pmhull_s *hull, int num, float *p);
 	pmtrace_t		(*PM_PlayerTrace) (float *start, float *end, int traceFlags, int ignore_pe );
 	struct pmtrace_s *(*PM_TraceLine)( float *start, float *end, int flags, int usehulll, int ignore_pe );
 	int32			(*RandomLong)( int32 lLow, int32 lHigh );
 	float			(*RandomFloat)( float flLow, float flHigh );
-	int				(*PM_GetModelType)( struct model_s *mod );
-	void			(*PM_GetModelBounds)( struct model_s *mod, float *mins, float *maxs );
-	void			*(*PM_HullForBsp)( physent_t *pe, float *offset );
-	float			(*PM_TraceModel)( physent_t *pEnt, float *start, float *end, pmtrace_t *trace );
+	int				(*PM_GetModelType)( struct pmmodel_s *mod );
+	void			(*PM_GetModelBounds)( struct pmmodel_s *mod, float *mins, float *maxs );
+	void			*(*PM_HullForBsp)( pmphysent_t *pe, float *offset );
+	float			(*PM_TraceModel)( pmphysent_t *pEnt, float *start, float *end, pmtrace_t *trace );
 	int				(*COM_FileSize)(char *filename);
 	pmbyte			*(*COM_LoadFile) (char *path, int usehunk, int *pLength);
 	void			(*COM_FreeFile) ( void *buffer );
@@ -232,9 +233,9 @@ typedef struct playermove_s
 	const char		*(*PM_TraceTexture) ( int ground, float *vstart, float *vend );
 	void			(*PM_PlaybackEventFull) ( int flags, int clientindex, unsigned short eventindex, float delay, float *origin, float *angles, float fparam1, float fparam2, int iparam1, int iparam2, int bparam1, int bparam2 );
 
-	pmtrace_t		(*PM_PlayerTraceEx) (float *start, float *end, int traceFlags, int (*pfnIgnore)( physent_t *pe ) );
-	int				(*PM_TestPlayerPositionEx) (float *pos, pmtrace_t *ptrace, int (*pfnIgnore)( physent_t *pe ) );
-	struct pmtrace_s *(*PM_TraceLineEx)( float *start, float *end, int flags, int usehulll, int (*pfnIgnore)( physent_t *pe ) );
-} playermove_t;
+	pmtrace_t		(*PM_PlayerTraceEx) (float *start, float *end, int traceFlags, int (*pfnIgnore)( pmphysent_t *pe ) );
+	int				(*PM_TestPlayerPositionEx) (float *pos, pmtrace_t *ptrace, int (*pfnIgnore)( pmphysent_t *pe ) );
+	struct pmtrace_s *(*PM_TraceLineEx)( float *start, float *end, int flags, int usehulll, int (*pfnIgnore)( pmphysent_t *pe ) );
+} pmplayermove_t;
 
 #endif

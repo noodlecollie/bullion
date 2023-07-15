@@ -2,8 +2,6 @@ include(static_shared_lib_utils)
 generate_export_header_template(${TARGETNAME_LIB_GOLDSRC_PLAYER_MOVEMENT} ${CMAKE_CURRENT_BINARY_DIR}/pm_export.h.in)
 
 set(SOURCES
-	include/steam/steamtypes.h
-	include/archtypes.h
 	include/pm_basictypes.h
 	include/pm_debug.h
 	include/pm_defs.h

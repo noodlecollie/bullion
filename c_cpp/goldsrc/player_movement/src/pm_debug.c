@@ -25,7 +25,7 @@
 #pragma warning(disable : 4244)
 #pragma warning(disable : 4305)
 
-extern playermove_t *pmove;
+extern pmplayermove_t *pmove;
 
 // Expand debugging BBOX particle hulls by this many units.
 #define BOX_GAP 0.0f
@@ -143,7 +143,7 @@ PM_DrawPhysEntBBox(int num)
 */
 void PM_DrawPhysEntBBox(int num, int pcolor, float life)
 {
-	physent_t *pe;
+	pmphysent_t *pe;
 	pmvec3_t org;
 	int j;
 	pmvec3_t tmp;

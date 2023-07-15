@@ -24,8 +24,8 @@
 
 #include "pm_export.h"
 
-GOLDSRC_PLAYERMOVEMENT_PUBLIC(void) PM_Init( struct playermove_s *ppmove );
-GOLDSRC_PLAYERMOVEMENT_PUBLIC(void) PM_Move ( struct playermove_s *ppmove, int server );
+GOLDSRC_PLAYERMOVEMENT_PUBLIC(void) PM_Init( struct pmplayermove_s *ppmove );
+GOLDSRC_PLAYERMOVEMENT_PUBLIC(void) PM_Move ( struct pmplayermove_s *ppmove, int server );
 GOLDSRC_PLAYERMOVEMENT_PUBLIC(char) PM_FindTextureType( char *name );
 
 // Spectator Movement modes (stored in pev->iuser1, so the physics code can get at them)

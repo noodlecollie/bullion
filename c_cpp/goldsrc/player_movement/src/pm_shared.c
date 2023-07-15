@@ -50,7 +50,7 @@ static int pm_shared_initialized = 0;
 
 typedef enum {mod_brush, mod_sprite, mod_alias, mod_studio} modtype_t;
 
-playermove_t *pmove = NULL;
+pmplayermove_t *pmove = NULL;
 
 typedef struct
 {
@@ -67,7 +67,7 @@ typedef struct mplane_s
 	pmbyte	pad[2];
 } mplane_t;
 
-typedef struct hull_s
+typedef struct pmhull_s
 {
 	dclipnode_t	*clipnodes;
 	mplane_t	*planes;
@@ -75,7 +75,7 @@ typedef struct hull_s
 	int			lastclipnode;
 	pmvec3_t		clip_mins;
 	pmvec3_t		clip_maxs;
-} hull_t;
+} pmhull_t;
 
 // Ducking time
 #define TIME_TO_DUCK		0.4
@@ -2059,7 +2059,7 @@ void PM_Duck( void )
 	}
 }
 
-void PM_LadderMove( physent_t *pLadder )
+void PM_LadderMove( pmphysent_t *pLadder )
 {
 	pmvec3_t		ladderCenter;
 	pmtrace_t		trace;
@@ -2190,11 +2190,11 @@ void PM_LadderMove( physent_t *pLadder )
 	}
 }
 
-physent_t *PM_Ladder( void )
+pmphysent_t *PM_Ladder( void )
 {
 	int			i;
-	physent_t	*pe;
-	hull_t		*hull;
+	pmphysent_t	*pe;
+	pmhull_t		*hull;
 	int			num;
 	pmvec3_t		test;
 
@@ -2205,7 +2205,7 @@ physent_t *PM_Ladder( void )
 		if ( pe->model && (modtype_t)pmove->PM_GetModelType( pe->model ) == mod_brush && pe->skin == CONTENTS_LADDER )
 		{
 
-			hull = (hull_t *)pmove->PM_HullForBsp( pe, test );
+			hull = (pmhull_t *)pmove->PM_HullForBsp( pe, test );
 			num = hull->firstclipnode;
 
 			// Offset the test point appropriately for this hull.
@@ -2945,7 +2945,7 @@ were contacted during the move.
 */
 void PM_PlayerMove ( pmboolean server )
 {
-	physent_t *pLadder = NULL;
+	pmphysent_t *pLadder = NULL;
 
 	// Are we running server code?
 	pmove->server = server;
@@ -3317,7 +3317,7 @@ invoked by each side as appropriate.  There should be no distinction, internally
 and client.  This will ensure that prediction behaves appropriately.
 */
 
-GOLDSRC_PLAYERMOVEMENT_PUBLIC(void) PM_Move ( struct playermove_s *ppmove, int server )
+GOLDSRC_PLAYERMOVEMENT_PUBLIC(void) PM_Move ( struct pmplayermove_s *ppmove, int server )
 {
 	assert( pm_shared_initialized );
 
@@ -3359,7 +3359,7 @@ int PM_GetPhysEntInfo( int ent )
 	return -1;
 }
 
-GOLDSRC_PLAYERMOVEMENT_PUBLIC(void) PM_Init( struct playermove_s *ppmove )
+GOLDSRC_PLAYERMOVEMENT_PUBLIC(void) PM_Init( struct pmplayermove_s *ppmove )
 {
 	assert( !pm_shared_initialized );
 
