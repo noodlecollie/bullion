@@ -7,6 +7,7 @@ typedef enum {false, true} pmboolean;
 typedef int pmboolean;
 #endif
 
+typedef unsigned char pmbyte;
 typedef float pmvec_t;
 typedef pmvec_t pmvec3_t[3];
 

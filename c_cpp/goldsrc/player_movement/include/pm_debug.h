@@ -21,8 +21,8 @@
 #include "pm_export.h"
 
 GOLDSRC_PLAYERMOVEMENT_PUBLIC(void) PM_ViewEntity( void );
-GOLDSRC_PLAYERMOVEMENT_PUBLIC(void) PM_DrawBBox(vec3_t mins, vec3_t maxs, vec3_t origin, int pcolor, float life);
-GOLDSRC_PLAYERMOVEMENT_PUBLIC(void) PM_ParticleLine(vec3_t start, vec3_t end, int pcolor, float life, float vert);
+GOLDSRC_PLAYERMOVEMENT_PUBLIC(void) PM_DrawBBox(pmvec3_t mins, pmvec3_t maxs, pmvec3_t origin, int pcolor, float life);
+GOLDSRC_PLAYERMOVEMENT_PUBLIC(void) PM_ParticleLine(pmvec3_t start, pmvec3_t end, int pcolor, float life, float vert);
 GOLDSRC_PLAYERMOVEMENT_PUBLIC(void) PM_ShowClipBox( void );
 
 #endif // PMOVEDBG_H

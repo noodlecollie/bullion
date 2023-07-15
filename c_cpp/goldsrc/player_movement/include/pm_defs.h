@@ -45,12 +45,12 @@ typedef struct physent_s
 {
 	char			name[32];             // Name of model, or "player" or "world".
 	int				player;
-	vec3_t			origin;               // Model's origin in world coordinates.
+	pmvec3_t			origin;               // Model's origin in world coordinates.
 	struct model_s	*model;		          // only for bsp models
 	struct model_s	*studiomodel;         // SOLID_BBOX, but studio clip intersections.
-	vec3_t			mins, maxs;	          // only for non-bsp models
+	pmvec3_t			mins, maxs;	          // only for non-bsp models
 	int				info;		          // For client or server to use to identify (index into edicts or cl_entities)
-	vec3_t			angles;               // rotated entities need this info for hull testing to work.
+	pmvec3_t			angles;               // rotated entities need this info for hull testing to work.
 
 	int				solid;				  // Triggers and func_door type WATER brushes are SOLID_NOT
 	int				skin;                 // BSP Contents for such things like fun_door water brushes.
@@ -59,8 +59,8 @@ typedef struct physent_s
 	// Complex collision detection.
 	float			frame;
 	int				sequence;
-	byte			controller[4];
-	byte			blending[2];
+	pmbyte			controller[4];
+	pmbyte			blending[2];
 
 	int				movetype;
 	int				takedamage;
@@ -77,61 +77,61 @@ typedef struct physent_s
 	float			fuser2;
 	float			fuser3;
 	float			fuser4;
-	vec3_t			vuser1;
-	vec3_t			vuser2;
-	vec3_t			vuser3;
-	vec3_t			vuser4;
+	pmvec3_t			vuser1;
+	pmvec3_t			vuser2;
+	pmvec3_t			vuser3;
+	pmvec3_t			vuser4;
 } physent_t;
 
 typedef struct usercmd_s
 {
 	short	lerp_msec;      // Interpolation time on client
-	byte	msec;           // Duration in ms of command
-	vec3_t	viewangles;     // Command view angles.
+	pmbyte	msec;           // Duration in ms of command
+	pmvec3_t	viewangles;     // Command view angles.
 
 // intended velocities
 	float	forwardmove;    // Forward velocity.
 	float	sidemove;       // Sideways velocity.
 	float	upmove;         // Upward velocity.
-	byte	lightlevel;     // Light level at spot where we are standing.
+	pmbyte	lightlevel;     // Light level at spot where we are standing.
 	unsigned short  buttons;  // Attack buttons
-	byte    impulse;          // Impulse command issued.
-	byte	weaponselect;	// Current weapon id
+	pmbyte    impulse;          // Impulse command issued.
+	pmbyte	weaponselect;	// Current weapon id
 
 // Experimental player impact stuff.
 	int		impact_index;
-	vec3_t	impact_position;
+	pmvec3_t	impact_position;
 } usercmd_t;
 
 typedef struct playermove_s
 {
 	int				player_index;  // So we don't try to run the PM_CheckStuck nudging too quickly.
-	qboolean		server;        // For debugging, are we running physics code on server side?
+	pmboolean		server;        // For debugging, are we running physics code on server side?
 
-	qboolean		multiplayer;   // 1 == multiplayer server
+	pmboolean		multiplayer;   // 1 == multiplayer server
 	float			time;          // realtime on host, for reckoning duck timing
 	float			frametime;	   // Duration of this frame
 
-	vec3_t			forward, right, up; // Vectors for angles
+	pmvec3_t			forward, right, up; // Vectors for angles
 	// player state
-	vec3_t			origin;        // Movement origin.
-	vec3_t			angles;        // Movement view angles.
-	vec3_t			oldangles;     // Angles before movement view angles were looked at.
-	vec3_t			velocity;      // Current movement direction.
-	vec3_t			movedir;       // For waterjumping, a forced forward velocity so we can fly over lip of ledge.
-	vec3_t			basevelocity;  // Velocity of the conveyor we are standing, e.g.
+	pmvec3_t			origin;        // Movement origin.
+	pmvec3_t			angles;        // Movement view angles.
+	pmvec3_t			oldangles;     // Angles before movement view angles were looked at.
+	pmvec3_t			velocity;      // Current movement direction.
+	pmvec3_t			movedir;       // For waterjumping, a forced forward velocity so we can fly over lip of ledge.
+	pmvec3_t			basevelocity;  // Velocity of the conveyor we are standing, e.g.
 
 	// For ducking/dead
-	vec3_t			view_ofs;      // Our eye position.
+	pmvec3_t			view_ofs;      // Our eye position.
 	float			flDuckTime;    // Time we started duck
-	qboolean		bInDuck;       // In process of ducking or ducked already?
+	pmboolean		bInDuck;       // In process of ducking or ducked already?
 
 	// For walking/falling
 	int				flTimeStepSound;  // Next time we can play a step sound
 	int				iStepLeft;
 
 	float			flFallVelocity;
-	vec3_t			punchangle;
+	pmvec3_t			punchangle;
 
 	float			flSwimTime;
 
@@ -145,7 +145,7 @@ typedef struct playermove_s
 	float			friction;
 	int				oldbuttons;    // Buttons last usercmd
 	float			waterjumptime; // Amount of time left in jumping out of water cycle.
-	qboolean		dead;          // Are we a dead player?
+	pmboolean		dead;          // Are we a dead player?
 	int				deadflag;
 	int				spectator;     // Should we use spectator physics model?
 	int				movetype;      // Our movement type, NOCLIP, WALK, FLY
@@ -170,10 +170,10 @@ typedef struct playermove_s
 	float			fuser2;
 	float			fuser3;
 	float			fuser4;
-	vec3_t			vuser1;
-	vec3_t			vuser2;
-	vec3_t			vuser3;
-	vec3_t			vuser4;
+	pmvec3_t			vuser1;
+	pmvec3_t			vuser2;
+	pmvec3_t			vuser3;
+	pmvec3_t			vuser4;
 	// world state
 	// Number of entities to clip against.
 	int				numphysent;
@@ -197,8 +197,8 @@ typedef struct playermove_s
 	char			physinfo[ MAX_PHYSINFO_STRING ]; // Physics info string
 
 	struct movevars_s *movevars;
-	vec3_t player_mins[ 4 ];
-	vec3_t player_maxs[ 4 ];
+	pmvec3_t player_mins[ 4 ];
+	pmvec3_t player_maxs[ 4 ];
 
 	// Common functions
 	const char		*(*PM_Info_ValueForKey) ( const char *s, const char *key );
@@ -219,15 +219,15 @@ typedef struct playermove_s
 	int				(*PM_GetModelType)( struct model_s *mod );
 	void			(*PM_GetModelBounds)( struct model_s *mod, float *mins, float *maxs );
 	void			*(*PM_HullForBsp)( physent_t *pe, float *offset );
-	float			(*PM_TraceModel)( physent_t *pEnt, float *start, float *end, trace_t *trace );
+	float			(*PM_TraceModel)( physent_t *pEnt, float *start, float *end, pmtrace_t *trace );
 	int				(*COM_FileSize)(char *filename);
-	byte			*(*COM_LoadFile) (char *path, int usehunk, int *pLength);
+	pmbyte			*(*COM_LoadFile) (char *path, int usehunk, int *pLength);
 	void			(*COM_FreeFile) ( void *buffer );
-	char			*(*memfgets)( byte *pMemFile, int fileSize, int *pFilePos, char *pBuffer, int bufferSize );
+	char			*(*memfgets)( pmbyte *pMemFile, int fileSize, int *pFilePos, char *pBuffer, int bufferSize );
 
 	// Functions
 	// Run functions for this frame?
-	qboolean		runfuncs;
+	pmboolean		runfuncs;
 	void			(*PM_PlaySound) ( int channel, const char *sample, float volume, float attenuation, int fFlags, int pitch );
 	const char		*(*PM_TraceTexture) ( int ground, float *vstart, float *vend );
 	void			(*PM_PlaybackEventFull) ( int flags, int clientindex, unsigned short eventindex, float delay, float *origin, float *angles, float fparam1, float fparam2, int iparam1, int iparam2, int bparam1, int bparam2 );

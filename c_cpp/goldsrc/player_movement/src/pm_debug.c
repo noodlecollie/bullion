@@ -43,8 +43,8 @@ static int PM_boxpnt[6][4] =
 GOLDSRC_PLAYERMOVEMENT_PUBLIC(void) PM_ShowClipBox( void )
 {
 #if defined( _DEBUG )
-	vec3_t org;
-	vec3_t offset = { 0, 0, 0 };
+	pmvec3_t org;
+	pmvec3_t offset = { 0, 0, 0 };
 
 	if ( !pmove->runfuncs )
 		return;
@@ -91,17 +91,17 @@ GOLDSRC_PLAYERMOVEMENT_PUBLIC(void) PM_ShowClipBox( void )
 
 /*
 ===============
-PM_ParticleLine(vec3_t start, vec3_t end, int color, float life)
+PM_ParticleLine(pmvec3_t start, pmvec3_t end, int color, float life)
 
 ================
 */
-GOLDSRC_PLAYERMOVEMENT_PUBLIC(void) PM_ParticleLine(vec3_t start, vec3_t end, int pcolor, float life, float vert)
+GOLDSRC_PLAYERMOVEMENT_PUBLIC(void) PM_ParticleLine(pmvec3_t start, pmvec3_t end, int pcolor, float life, float vert)
 {
 	float linestep = 2.0f;
 	float curdist;
 	float len;
-	vec3_t curpos;
-	vec3_t diff;
+	pmvec3_t curpos;
+	pmvec3_t diff;
 	int i;
 	// Determine distance;
 
@@ -123,11 +123,11 @@ GOLDSRC_PLAYERMOVEMENT_PUBLIC(void) PM_ParticleLine(vec3_t start, vec3_t end, in
 
 /*
 ================
-PM_DrawRectangle(vec3_t tl, vec3_t br)
+PM_DrawRectangle(pmvec3_t tl, pmvec3_t br)
 
 ================
 */
-void PM_DrawRectangle(vec3_t tl, vec3_t bl, vec3_t tr, vec3_t br, int pcolor, float life)
+void PM_DrawRectangle(pmvec3_t tl, pmvec3_t bl, pmvec3_t tr, pmvec3_t br, int pcolor, float life)
 {
 	PM_ParticleLine(tl, bl, pcolor, life, 0);
 	PM_ParticleLine(bl, br, pcolor, life, 0);
@@ -144,12 +144,12 @@ PM_DrawPhysEntBBox(int num)
 void PM_DrawPhysEntBBox(int num, int pcolor, float life)
 {
 	physent_t *pe;
-	vec3_t org;
+	pmvec3_t org;
 	int j;
-	vec3_t tmp;
-	vec3_t		p[8];
+	pmvec3_t tmp;
+	pmvec3_t		p[8];
 	float gap = BOX_GAP;
-	vec3_t modelmins, modelmaxs;
+	pmvec3_t modelmins, modelmaxs;
 
 	if (num >= pmove->numphysent ||
 		num <= 0)
@@ -174,7 +174,7 @@ void PM_DrawPhysEntBBox(int num, int pcolor, float life)
 		// If the bbox should be rotated, do that
 		if (pe->angles[0] || pe->angles[1] || pe->angles[2])
 		{
-			vec3_t	forward, right, up;
+			pmvec3_t	forward, right, up;
 
 			AngleVectorsTranspose(pe->angles, forward, right, up);
 			for (j = 0; j < 8; j++)
@@ -227,16 +227,16 @@ void PM_DrawPhysEntBBox(int num, int pcolor, float life)
 
 /*
 ================
-PM_DrawBBox(vec3_t mins, vec3_t maxs, vec3_t origin, int pcolor, float life)
+PM_DrawBBox(pmvec3_t mins, pmvec3_t maxs, pmvec3_t origin, int pcolor, float life)
 
 ================
 */
-GOLDSRC_PLAYERMOVEMENT_PUBLIC(void) PM_DrawBBox(vec3_t mins, vec3_t maxs, vec3_t origin, int pcolor, float life)
+GOLDSRC_PLAYERMOVEMENT_PUBLIC(void) PM_DrawBBox(pmvec3_t mins, pmvec3_t maxs, pmvec3_t origin, int pcolor, float life)
 {
 	int j;
 
-	vec3_t tmp;
-	vec3_t		p[8];
+	pmvec3_t tmp;
+	pmvec3_t		p[8];
 	float gap = BOX_GAP;
 
 	for (j = 0; j < 8; j++)
@@ -275,10 +275,10 @@ Tries to shoot a ray out by about 128 units.
 */
 GOLDSRC_PLAYERMOVEMENT_PUBLIC(void) PM_ViewEntity( void )
 {
-	vec3_t forward, right, up;
+	pmvec3_t forward, right, up;
 	float raydist = 256.0f;
-	vec3_t origin;
-	vec3_t end;
+	pmvec3_t origin;
+	pmvec3_t end;
 	int i;
 	pmtrace_t trace;
 	int pcolor = 77;
