@@ -215,7 +215,7 @@ typedef struct pmplayermove_s
 	int				(*PM_HullPointContents) ( struct pmhull_s *hull, int num, float *p);
 	pmtrace_t		(*PM_PlayerTrace) (float *start, float *end, int traceFlags, int ignore_pe );
 	struct pmtrace_s *(*PM_TraceLine)( float *start, float *end, int flags, int usehulll, int ignore_pe );
-	int32			(*RandomLong)( int32 lLow, int32 lHigh );
+	long			(*RandomLong)( long lLow, long lHigh );
 	float			(*RandomFloat)( float flLow, float flHigh );
 	int				(*PM_GetModelType)( struct pmmodel_s *mod );
 	void			(*PM_GetModelBounds)( struct pmmodel_s *mod, float *mins, float *maxs );
