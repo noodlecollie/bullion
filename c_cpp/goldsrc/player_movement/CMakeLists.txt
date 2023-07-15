@@ -23,6 +23,7 @@ set(SOURCES
 
 set(LIBS
 	$<$<NOT:$<STREQUAL:"${CMAKE_CXX_COMPILER_ID}","MSVC">>:m>
+	safestring_static
 )
 
 create_library_target(

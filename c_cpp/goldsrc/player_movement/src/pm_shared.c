@@ -22,6 +22,7 @@
 #include "pm_debug.h"
 #include "in_buttons.h"
 #include "posix_string.h"
+#include "safe_str_lib.h"
 #include <stdio.h>   // NULL
 #include <math.h>    // sqrt
 #include <string.h>  // strcpy
@@ -164,13 +165,13 @@ void PM_SwapTextures(int i, int j)
 	char chTemp;
 	char szTemp[CBTEXTURENAMEMAX];
 
-	strcpy(szTemp, grgszTextureName[i]);
+	strcpy_s(szTemp, sizeof(szTemp), grgszTextureName[i]);
 	chTemp = grgchTextureType[i];
 
-	strcpy(grgszTextureName[i], grgszTextureName[j]);
+	strcpy_s(grgszTextureName[i], sizeof(grgszTextureName[i]), grgszTextureName[j]);
 	grgchTextureType[i] = grgchTextureType[j];
 
-	strcpy(grgszTextureName[j], szTemp);
+	strcpy_s(grgszTextureName[j], sizeof(grgszTextureName[j]), szTemp);
 	grgchTextureType[j] = chTemp;
 }
 
