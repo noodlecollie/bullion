@@ -79,6 +79,7 @@ typedef union DLONG {
 
 extern DLONG	dlong;
 
+#if 0
 #ifdef _WIN32
 void __inline set_fpu_cw(void)
 {
@@ -112,6 +113,7 @@ void __inline restore_fpu_cw(void)
 #define quick_ftol(f) ftol(f)
 #define restore_fpu_cw() /* */
 #endif
+#endif // #if 0
 
 void FloorDivMod (double numer, double denom, int *quotient,
 		int *rem);

@@ -42,7 +42,7 @@
 #		endif // @uppercaseTargetName@_PRODUCER
 #	else
 		// Library is static, so functions do not need import/export annotations
-#		define @uppercaseTargetName@_API
+#		define @uppercaseTargetName@_EXPORT
 #	endif // @uppercaseTargetName@_LIBRARY
 
 ////////////////////////////////////////////

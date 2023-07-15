@@ -45,6 +45,13 @@ macro(create_library_target)
 		src
 	)
 
+	if("${LIBTARGET_TYPE}" STREQUAL "SHARED")
+		# Add a private definition to say that this library is being built rather than used.
+		target_compile_definitions(${fullTargetName} PRIVATE
+			-D${uppercaseTargetName}_PRODUCER
+		)
+	endif()
+
 	# Set the compiled binaries to install to the correct location.
 	install(TARGETS ${fullTargetName}
 		ARCHIVE DESTINATION "${LIBTARGET_INSTALL_PREFIX}/${fullTargetName}/lib"
