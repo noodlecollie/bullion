@@ -644,11 +644,6 @@
 #define SF_TRAIN_START_ON		4		// Train is initially moving
 #define SF_TRAIN_PASSABLE		8		// Train is not solid -- used to make water trains
 
-// buttons
-#ifndef IN_BUTTONS_H
-#include "in_buttons.h"
-#endif
-
 // Break Model Defines
 
 #define BREAK_TYPEMASK	0x4F
