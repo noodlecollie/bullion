@@ -19,6 +19,7 @@
 #pragma once
 
 #include "pm_export.h"
+#include "pm_basictypes.h"
 
 GOLDSRC_PLAYERMOVEMENT_PUBLIC(void) PM_ViewEntity( void );
 GOLDSRC_PLAYERMOVEMENT_PUBLIC(void) PM_DrawBBox(pmvec3_t mins, pmvec3_t maxs, pmvec3_t origin, int pcolor, float life);

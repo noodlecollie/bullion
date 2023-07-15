@@ -12,11 +12,9 @@
 *   without written permission from Valve LLC.
 *
 ****/
-#if !defined( PMTRACEH )
-#define PMTRACEH
-#ifdef _WIN32
-#pragma once
-#endif
+
+#ifndef PM_TRACE_H
+#define PM_TRACE_H
 
 #include "pm_basictypes.h"
 
@@ -42,4 +40,4 @@ struct pmtrace_s
 	int         hitgroup;
 };
 
-#endif
+#endif // PM_TRACE_H

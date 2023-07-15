@@ -12,10 +12,16 @@
 *   without written permission from Valve LLC.
 *
 ****/
-// pm_defs.h
-#if !defined( PM_DEFSH )
-#define PM_DEFSH
-#pragma once
+
+#ifndef PM_DEFS_H
+#define PM_DEFS_H
+
+#include "pmtrace.h"
+#include "pm_info.h"
+
+struct pmhull_s;
+struct pmmodel_s;
+struct pmmovevars_s;
 
 #define	MAX_PHYSENTS 600 		  // Must have room for all entities in the world.
 #define MAX_MOVEENTS 64
@@ -31,17 +37,6 @@
 #define PM_TRACELINE_PHYSENTSONLY	0
 #define PM_TRACELINE_ANYVISIBLE		1
 
-
-#include "pm_info.h"
-
-// PM_PlayerTrace results.
-#include "pmtrace.h"
-
-struct pmhull_s;
-struct pmmodel_s;
-struct pmmovevars_s;
-
-// pmphysent_t
 typedef struct pmphysent_s
 {
 	char			name[32];             // Name of model, or "player" or "world".
@@ -238,4 +233,4 @@ typedef struct pmplayermove_s
 	struct pmtrace_s *(*PM_TraceLineEx)( float *start, float *end, int flags, int usehulll, int (*pfnIgnore)( pmphysent_t *pe ) );
 } pmplayermove_t;
 
-#endif
+#endif // PM_DEFS_H

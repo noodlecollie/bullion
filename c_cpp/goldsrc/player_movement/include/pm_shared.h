@@ -13,16 +13,14 @@
 *
 ****/
 
-//
-// pm_shared.h
-//
-
-#if !defined( PM_SHAREDH )
-#define PM_SHAREDH
+#ifndef PM_SHARED_H
+#define PM_SHARED_H
 
 #pragma once
 
 #include "pm_export.h"
+
+struct pmplayermove_s;
 
 GOLDSRC_PLAYERMOVEMENT_PUBLIC(void) PM_Init( struct pmplayermove_s *ppmove );
 GOLDSRC_PLAYERMOVEMENT_PUBLIC(void) PM_Move ( struct pmplayermove_s *ppmove, int server );
@@ -37,4 +35,4 @@ GOLDSRC_PLAYERMOVEMENT_PUBLIC(char) PM_FindTextureType( char *name );
 #define OBS_MAP_FREE			5
 #define OBS_MAP_CHASE			6
 
-#endif
+#endif // PM_SHARED_H

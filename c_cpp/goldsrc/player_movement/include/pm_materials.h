@@ -1,9 +1,9 @@
 /***
 *
 *	Copyright (c) 1996-2002, Valve LLC. All rights reserved.
-*	
-*	This product contains software technology licensed from Id 
-*	Software, Inc. ("Id Technology").  Id Technology (c) 1996 Id Software, Inc. 
+*
+*	This product contains software technology licensed from Id
+*	Software, Inc. ("Id Technology").  Id Technology (c) 1996 Id Software, Inc.
 *	All Rights Reserved.
 *
 *   Use, distribution, and modification of this source code and/or resulting
@@ -12,9 +12,9 @@
 *   without written permission from Valve LLC.
 *
 ****/
-#if !defined( PM_MATERIALSH )
-#define PM_MATERIALSH
-#pragma once
+
+#ifndef PM_MATERIALS_H
+#define PM_MATERIALS_H
 
 #define CBTEXTURENAMEMAX	13			// only load first n chars of name
 
@@ -31,4 +31,4 @@
 #define CHAR_TEX_FLESH		'F'
 #define CHAR_TEX_SNOW		'N'
 
-#endif // !PM_MATERIALSH
+#endif // PM_MATERIALS_H

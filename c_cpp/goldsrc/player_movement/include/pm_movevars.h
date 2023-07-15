@@ -5,13 +5,13 @@
 // $NoKeywords: $
 //=============================================================================
 
-// pm_movevars.h
-#if !defined( PM_MOVEVARSH )
-#define PM_MOVEVARSH
 
-// pmmovevars_t                  // Physics variables.
+#ifndef PM_MOVEVARS_H
+#define PM_MOVEVARS_H
+
 typedef struct pmmovevars_s pmmovevars_t;
 
+// Physics variables.
 struct pmmovevars_s
 {
 	float	gravity;           // Gravity for map
@@ -42,6 +42,4 @@ struct pmmovevars_s
 	float	skyvec_z;			//
 };
 
-extern pmmovevars_t movevars;
-
-#endif
+#endif // PM_MOVEVARS_H
