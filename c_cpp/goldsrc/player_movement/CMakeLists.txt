@@ -4,6 +4,7 @@ generate_export_header_template(${TARGETNAME_LIB_GOLDSRC_PLAYER_MOVEMENT} ${CMAK
 set(SOURCES
 	include/steam/steamtypes.h
 	include/archtypes.h
+	include/pm_basictypes.h
 	include/pm_debug.h
 	include/pm_defs.h
 	include/pm_info.h
@@ -11,7 +12,6 @@ set(SOURCES
 	include/pm_movevars.h
 	include/pm_shared.h
 	include/pmtrace.h
-	include/usercmd.h
 
 	src/const.h
 	src/in_buttons.h

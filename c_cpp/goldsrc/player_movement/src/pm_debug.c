@@ -15,7 +15,6 @@
 
 #include "mathlib.h"
 #include "const.h"
-#include "usercmd.h"
 #include "pm_defs.h"
 #include "pm_shared.h"
 #include "pm_movevars.h"
