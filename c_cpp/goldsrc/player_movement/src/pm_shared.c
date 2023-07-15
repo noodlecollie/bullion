@@ -22,7 +22,6 @@
 #include "pm_debug.h"
 #include "in_buttons.h"
 #include "posix_string.h"
-#include "safe_str_lib.h"
 #include <stdio.h>   // NULL
 #include <math.h>    // sqrt
 #include <string.h>  // strcpy
@@ -254,7 +253,7 @@ void PM_InitTextureTypes()
 		// null-terminate name and save in sentences array
 		j = min(j, CBTEXTURENAMEMAX - 1 + i);
 		buffer[j] = 0;
-		strcpy(&(grgszTextureName[gcTextures++][0]), &(buffer[i]));
+		strcpy_s(grgszTextureName[gcTextures++], CBTEXTURENAMEMAX, &(buffer[i]));
 	}
 
 	// Must use engine to free since we are in a .dll
@@ -575,7 +574,7 @@ void PM_CatagorizeTextureType(void)
 		pTextureName++;
 	// '}}'
 
-	strcpy(pmove->sztexturename, pTextureName);
+	strcpy_s(pmove->sztexturename, sizeof(pmove->sztexturename), pTextureName);
 	pmove->sztexturename[CBTEXTURENAMEMAX - 1] = 0;
 
 	// get texture type

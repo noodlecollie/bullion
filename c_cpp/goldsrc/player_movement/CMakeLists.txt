@@ -19,11 +19,12 @@ set(SOURCES
 	src/pm_debug.c
 	src/pm_math.c
 	src/pm_shared.c
+	src/posix_string.h
 )
 
 set(LIBS
 	$<$<NOT:$<STREQUAL:"${CMAKE_CXX_COMPILER_ID}","MSVC">>:m>
-	safestring_static
+	$<$<NOT:$<STREQUAL:"${CMAKE_CXX_COMPILER_ID}","MSVC">>:safestring_static>
 )
 
 create_library_target(
