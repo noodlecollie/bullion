@@ -28,11 +28,6 @@
 #include <stdlib.h>  // atoi
 #include <ctype.h>   // isspace
 
-#ifndef _WIN32
-#define STRICMP strcasecmp
-#define STRNICMP strncasecmp
-#endif
-
 #ifdef CLIENT_DLL
 // Spectator Mode
 int iJumpSpectator;
