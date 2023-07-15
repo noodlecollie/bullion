@@ -25,8 +25,6 @@
 // fall over
 #define ROLL 2
 
-#pragma warning(disable : 4244)
-
 const pmvec3_t vec3_origin = {0, 0, 0};
 const int nanmask = 255 << 23;
 

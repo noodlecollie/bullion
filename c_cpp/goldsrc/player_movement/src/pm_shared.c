@@ -46,8 +46,6 @@ extern float vJumpAngles[3];
 
 static int pm_shared_initialized = 0;
 
-#pragma warning(disable : 4305)
-
 typedef enum
 {
 	mod_brush,
@@ -135,7 +133,6 @@ typedef struct pmhull_s
 #define PLAYER_DUCKING_MULTIPLIER 0.333
 
 // double to float warning
-#pragma warning(disable : 4244)
 #define max(a, b) (((a) > (b)) ? (a) : (b))
 #define min(a, b) (((a) < (b)) ? (a) : (b))
 // up / down
@@ -594,7 +591,6 @@ void PM_UpdateStepSound(void)
 	float fvol;
 	pmvec3_t knee;
 	pmvec3_t feet;
-	pmvec3_t center;
 	float height;
 	float speed;
 	float velrun;
@@ -638,7 +634,6 @@ void PM_UpdateStepSound(void)
 	{
 		fWalking = speed < velrun;
 
-		VectorCopy(pmove->origin, center);
 		VectorCopy(pmove->origin, knee);
 		VectorCopy(pmove->origin, feet);
 
@@ -1121,7 +1116,6 @@ Only used by players.  Moves along the ground when player is a MOVETYPE_WALK.
 */
 void PM_WalkMove()
 {
-	int clip;
 	int oldonground;
 	int i;
 
@@ -1131,7 +1125,7 @@ void PM_WalkMove()
 	pmvec3_t wishdir;
 	float wishspeed;
 
-	pmvec3_t dest, start;
+	pmvec3_t dest;
 	pmvec3_t original, originalvel;
 	pmvec3_t down, downvel;
 	float downdist, updist;
@@ -1194,7 +1188,6 @@ void PM_WalkMove()
 	dest[2] = pmove->origin[2];
 
 	// first try moving directly to the next spot
-	VectorCopy(dest, start);
 	trace = pmove->PM_PlayerTrace(pmove->origin, dest, PM_NORMAL, -1);
 	// If we made it all the way, then copy trace end
 	//  as new player position.
@@ -1217,7 +1210,7 @@ void PM_WalkMove()
 	VectorCopy(pmove->velocity, originalvel);  //  velocity.
 
 	// Slide move
-	clip = PM_FlyMove();
+	PM_FlyMove();
 
 	// Copy the results out
 	VectorCopy(pmove->origin, down);
@@ -1242,7 +1235,7 @@ void PM_WalkMove()
 	}
 
 	// slide move the rest of the way.
-	clip = PM_FlyMove();
+	PM_FlyMove();
 
 	// Now try going back down from the end point
 	//  press down the stepheight
@@ -2052,9 +2045,6 @@ void PM_Duck(void)
 
 	int buttonsChanged = (pmove->oldbuttons ^ pmove->cmd.buttons);  // These buttons have changed this frame
 	int nButtonPressed = buttonsChanged & pmove->cmd.buttons;       // The changed ones still down are "pressed"
-
-	int duckchange = buttonsChanged & IN_DUCK ? 1 : 0;
-	int duckpressed = nButtonPressed & IN_DUCK ? 1 : 0;
 
 	if ( pmove->cmd.buttons & IN_DUCK )
 	{
