@@ -19,11 +19,10 @@ set(SOURCES
 	src/pm_debug.c
 	src/pm_math.c
 	src/pm_shared.c
-
 )
 
 set(LIBS
-	$<$<NOT:$<STREQUAL:CMAKE_CXX_COMPILER_ID,"MSVC">>:m>
+	$<$<NOT:$<STREQUAL:"${CMAKE_CXX_COMPILER_ID}","MSVC">>:m>
 )
 
 create_library_target(

@@ -35,15 +35,15 @@ void AngleVectors(const pmvec3_t angles, pmvec3_t forward, pmvec3_t right, pmvec
 	float angle;
 	float sr, sp, sy, cr, cp, cy;
 
-	angle = angles[YAW] * (M_PI * 2 / 360);
-	sy = sin(angle);
-	cy = cos(angle);
-	angle = angles[PITCH] * (M_PI * 2 / 360);
-	sp = sin(angle);
-	cp = cos(angle);
-	angle = angles[ROLL] * (M_PI * 2 / 360);
-	sr = sin(angle);
-	cr = cos(angle);
+	angle = angles[YAW] * (M_PI_F * 2 / 360);
+	sy = sinf(angle);
+	cy = cosf(angle);
+	angle = angles[PITCH] * (M_PI_F * 2 / 360);
+	sp = sinf(angle);
+	cp = cosf(angle);
+	angle = angles[ROLL] * (M_PI_F * 2 / 360);
+	sr = sinf(angle);
+	cr = cosf(angle);
 
 	if ( forward )
 	{
@@ -70,15 +70,15 @@ void AngleVectorsTranspose(const pmvec3_t angles, pmvec3_t forward, pmvec3_t rig
 	float angle;
 	float sr, sp, sy, cr, cp, cy;
 
-	angle = angles[YAW] * (M_PI * 2 / 360);
-	sy = sin(angle);
-	cy = cos(angle);
-	angle = angles[PITCH] * (M_PI * 2 / 360);
-	sp = sin(angle);
-	cp = cos(angle);
-	angle = angles[ROLL] * (M_PI * 2 / 360);
-	sr = sin(angle);
-	cr = cos(angle);
+	angle = angles[YAW] * (M_PI_F * 2 / 360);
+	sy = sinf(angle);
+	cy = cosf(angle);
+	angle = angles[PITCH] * (M_PI_F * 2 / 360);
+	sp = sinf(angle);
+	cp = cosf(angle);
+	angle = angles[ROLL] * (M_PI_F * 2 / 360);
+	sr = sinf(angle);
+	cr = cosf(angle);
 
 	if ( forward )
 	{
@@ -125,8 +125,6 @@ void CrossProduct(const pmvec3_t v1, const pmvec3_t v2, pmvec3_t cross)
 	cross[2] = v1[0] * v2[1] - v1[1] * v2[0];
 }
 
-double sqrt(double x);
-
 float Length(const pmvec3_t v)
 {
 	int i;
@@ -134,7 +132,7 @@ float Length(const pmvec3_t v)
 
 	for ( i = 0; i < 3; i++ )
 		length += v[i] * v[i];
-	length = sqrt(length);  // FIXME
+	length = sqrtf(length);  // FIXME
 
 	return length;
 }
@@ -151,7 +149,7 @@ float VectorNormalize(pmvec3_t v)
 	float length, ilength;
 
 	length = v[0] * v[0] + v[1] * v[1] + v[2] * v[2];
-	length = sqrt(length);  // FIXME
+	length = sqrtf(length);  // FIXME
 
 	if ( length )
 	{
