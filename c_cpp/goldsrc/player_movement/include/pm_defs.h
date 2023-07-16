@@ -16,10 +16,10 @@
 #ifndef PM_DEFS_H
 #define PM_DEFS_H
 
+#include "pm_basictypes.h"
 #include "pmtrace.h"
 #include "pm_info.h"
 
-struct pmhull_s;
 struct pmmodel_s;
 struct pmmovevars_s;
 
@@ -36,6 +36,31 @@ struct pmmovevars_s;
 // Values for flags parameter of PM_TraceLine
 #define PM_TRACELINE_PHYSENTSONLY 0
 #define PM_TRACELINE_ANYVISIBLE 1
+
+typedef struct pmclipnode_s
+{
+	int planenum;
+	short children[2];  // negative numbers are contents
+} pmclipnode_t;
+
+typedef struct pmplane_s
+{
+	pmvec3_t normal;  // surface normal
+	float dist;       // closest appoach to origin
+	pmbyte type;      // for texture axis selection and fast side tests
+	pmbyte signbits;  // signx + signy<<1 + signz<<1
+	pmbyte pad[2];
+} pmplane_t;
+
+typedef struct pmhull_s
+{
+	pmclipnode_t* clipnodes;
+	pmplane_t* planes;
+	int firstclipnode;
+	int lastclipnode;
+	pmvec3_t clip_mins;
+	pmvec3_t clip_maxs;
+} pmhull_t;
 
 typedef struct pmphysent_s
 {
@@ -207,7 +232,7 @@ typedef struct pmplayermove_s
 	void (*PM_StuckTouch)(int hitent, pmtrace_t* ptraceresult);
 	int (*PM_PointContents)(float* p, int* truecontents /*filled in if this is non-null*/);
 	int (*PM_TruePointContents)(float* p);
-	int (*PM_HullPointContents)(struct pmhull_s* hull, int num, float* p);
+	int (*PM_HullPointContents)(pmhull_t* hull, int num, float* p);
 	pmtrace_t (*PM_PlayerTrace)(float* start, float* end, int traceFlags, int ignore_pe);
 	struct pmtrace_s* (*PM_TraceLine)(float* start, float* end, int flags, int usehulll, int ignore_pe);
 	long (*RandomLong)(long lLow, long lHigh);

@@ -22,7 +22,7 @@ typedef struct
 {
 	pmvec3_t normal;
 	float dist;
-} pmplane_t;
+} pmtraceplane_t;
 
 typedef struct pmtrace_s pmtrace_t;
 
@@ -33,7 +33,7 @@ struct pmtrace_s
 	pmboolean inopen, inwater;  // End point is in empty space or in water
 	float fraction;             // time completed, 1.0 = didn't hit anything
 	pmvec3_t endpos;            // final position
-	pmplane_t plane;            // surface normal at impact
+	pmtraceplane_t plane;       // surface normal at impact
 	int ent;                    // entity at impact
 	pmvec3_t deltavelocity;     // Change in player's velocity caused by impact.
 								// Only run on server.
