@@ -1,4 +1,4 @@
-namespace Bullion.PlayerMovement
+namespace Bullion.PlayerMovement.Internal
 {
 	internal static class Defs
 	{
