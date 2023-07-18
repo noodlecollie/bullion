@@ -12,7 +12,7 @@ namespace Bullion.PlayerMovement.Internal
 
 	// void (*PM_Particle)(float* origin, int color, float life, int zpos, int zvel);
 	internal delegate void PMDelegate_Particle(
-		[In, MarshalAs(UnmanagedType.LPArray, SizeConst = 3)]float[] origin,
+		[In, MarshalAs(UnmanagedType.LPArray, SizeConst = 3)] float[] origin,
 		float life,
 		int zpos,
 		int zvel);
@@ -26,18 +26,18 @@ namespace Bullion.PlayerMovement.Internal
 	// This solution may help? https://stackoverflow.com/questions/10361369/marshal-va-list-in-c-sharp-delegate
 
 	// void (*Con_NPrintf)(int idx, char* fmt, ...);
-	internal delegate void PMDelegate_Con_NPrintF(
+	internal delegate void PMDelegate_Con_NPrintf(
 		int idx,
 		[MarshalAs(UnmanagedType.LPStr)] string fmt,
 		IntPtr argAddresses);
 
 	// void (*Con_DPrintf)(char* fmt, ...);
-	internal delegate void PMDelegate_Con_DPrintF(
+	internal delegate void PMDelegate_Con_DPrintf(
 		[MarshalAs(UnmanagedType.LPStr)] string fmt,
 		IntPtr argAddresses);
 
 	// void (*Con_Printf)(char* fmt, ...);
-	internal delegate void PMDelegate_Con_PrintF(
+	internal delegate void PMDelegate_Con_Printf(
 		[MarshalAs(UnmanagedType.LPStr)] string fmt,
 		IntPtr argAddresses);
 
@@ -189,6 +189,14 @@ namespace Bullion.PlayerMovement.Internal
 		int flags,
 		int usehull,
 		[MarshalAs(UnmanagedType.FunctionPtr)] PMDelegate_IgnoreEnt ignore);
+
+	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+	internal struct Vec3
+	{
+		internal float x;
+		internal float y;
+		internal float z;
+	};
 
 	// pm_defs.h: pmclipnode_t
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
@@ -543,93 +551,93 @@ namespace Bullion.PlayerMovement.Internal
 		internal float[] player_maxs;
 
 		[MarshalAs(UnmanagedType.FunctionPtr)]
-		PMDelegate_Info_ValueForKey Info_ValueForKey;
+		internal PMDelegate_Info_ValueForKey Info_ValueForKey;
 
 		[MarshalAs(UnmanagedType.FunctionPtr)]
-		PMDelegate_Particle Particle;
+		internal PMDelegate_Particle Particle;
 
 		[MarshalAs(UnmanagedType.FunctionPtr)]
-		PMDelegate_TestPlayerPosition TestPlayerPostiion;
+		internal PMDelegate_TestPlayerPosition TestPlayerPosition;
 
 		[MarshalAs(UnmanagedType.FunctionPtr)]
-		PMDelegate_Con_NPrintF Con_NPrintf;
+		internal PMDelegate_Con_NPrintf Con_NPrintf;
 
 		[MarshalAs(UnmanagedType.FunctionPtr)]
-		PMDelegate_Con_DPrintF Con_DPrintf;
+		internal PMDelegate_Con_DPrintf Con_DPrintf;
 
 		[MarshalAs(UnmanagedType.FunctionPtr)]
-		PMDelegate_Con_PrintF Con_Printf;
+		internal PMDelegate_Con_Printf Con_Printf;
 
 		[MarshalAs(UnmanagedType.FunctionPtr)]
-		PMDelegate_Sys_FloatTime Sys_FloatTime;
+		internal PMDelegate_Sys_FloatTime Sys_FloatTime;
 
 		[MarshalAs(UnmanagedType.FunctionPtr)]
-		PMDelegate_StuckTouch StuckTouch;
+		internal PMDelegate_StuckTouch StuckTouch;
 
 		[MarshalAs(UnmanagedType.FunctionPtr)]
-		PMDelegate_PointContents PointContents;
+		internal PMDelegate_PointContents PointContents;
 
 		[MarshalAs(UnmanagedType.FunctionPtr)]
-		PMDelegate_TruePointContents TruePointContents;
+		internal PMDelegate_TruePointContents TruePointContents;
 
 		[MarshalAs(UnmanagedType.FunctionPtr)]
-		PMDelegate_HullPointContents HullPointContents;
+		internal PMDelegate_HullPointContents HullPointContents;
 
 		[MarshalAs(UnmanagedType.FunctionPtr)]
-		PMDelegate_PlayerTrace PlayerTrace;
+		internal PMDelegate_PlayerTrace PlayerTrace;
 
 		[MarshalAs(UnmanagedType.FunctionPtr)]
-		PMDelegate_TraceLine TraceLine;
+		internal PMDelegate_TraceLine TraceLine;
 
 		[MarshalAs(UnmanagedType.FunctionPtr)]
-		PMDelegate_RandomLong RandomLong;
+		internal PMDelegate_RandomLong RandomLong;
 
 		[MarshalAs(UnmanagedType.FunctionPtr)]
-		PMDelegate_RandomFloat RandomFloat;
+		internal PMDelegate_RandomFloat RandomFloat;
 
 		[MarshalAs(UnmanagedType.FunctionPtr)]
-		PMDelegate_GetModelType GetModelType;
+		internal PMDelegate_GetModelType GetModelType;
 
 		[MarshalAs(UnmanagedType.FunctionPtr)]
-		PMDelegate_GetModelBounds GetModelBounds;
+		internal PMDelegate_GetModelBounds GetModelBounds;
 
 		[MarshalAs(UnmanagedType.FunctionPtr)]
-		PMDelegate_HullForBSP HullForBSP;
+		internal PMDelegate_HullForBSP HullForBSP;
 
 		[MarshalAs(UnmanagedType.FunctionPtr)]
-		PMDelegate_TraceModel TraceModel;
+		internal PMDelegate_TraceModel TraceModel;
 
 		[MarshalAs(UnmanagedType.FunctionPtr)]
-		PMDelegate_COM_FileSize COM_FileSize;
+		internal PMDelegate_COM_FileSize COM_FileSize;
 
 		[MarshalAs(UnmanagedType.FunctionPtr)]
-		PMDelegate_COM_LoadFile COM_LoadFile;
+		internal PMDelegate_COM_LoadFile COM_LoadFile;
 
 		[MarshalAs(UnmanagedType.FunctionPtr)]
-		PMDelegate_COM_FreeFile COM_FreeFile;
+		internal PMDelegate_COM_FreeFile COM_FreeFile;
 
 		[MarshalAs(UnmanagedType.FunctionPtr)]
-		PMDelegate_memfgets memfgets;
+		internal PMDelegate_memfgets memfgets;
 
 		[MarshalAs(UnmanagedType.I1)]
 		internal bool runfuncs;
 
 		[MarshalAs(UnmanagedType.FunctionPtr)]
-		PMDelegate_PlaySound PlaySound;
+		internal PMDelegate_PlaySound PlaySound;
 
 		[MarshalAs(UnmanagedType.FunctionPtr)]
-		PMDelegate_TraceTexture TraceTexture;
+		internal PMDelegate_TraceTexture TraceTexture;
 
 		[MarshalAs(UnmanagedType.FunctionPtr)]
-		PMDelegate_PlayBackEventFull PlayBackEventFull;
+		internal PMDelegate_PlayBackEventFull PlayBackEventFull;
 
 		[MarshalAs(UnmanagedType.FunctionPtr)]
-		PMDelegate_PlayerTraceEx PlayerTraceEx;
+		internal PMDelegate_PlayerTraceEx PlayerTraceEx;
 
 		[MarshalAs(UnmanagedType.FunctionPtr)]
-		PMDelegate_TestPlayerPositionEx TestPlayerPositionEx;
+		internal PMDelegate_TestPlayerPositionEx TestPlayerPositionEx;
 
 		[MarshalAs(UnmanagedType.FunctionPtr)]
-		PMDelegate_TraceLineEx TraceLineEx;
+		internal PMDelegate_TraceLineEx TraceLineEx;
 	}
 }
