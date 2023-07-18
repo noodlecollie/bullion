@@ -4,6 +4,8 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 project(bullion VERSION 0.1.0 LANGUAGES C CXX)
 
+option(ENABLE_TRACE "Enables trace debugging messages (very verbose)." OFF)
+
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED YES)
 
