@@ -19,6 +19,8 @@ set(CMAKE_COMPILE_WARNING_AS_ERROR YES)
 
 include(project_definitions)
 
+set(TARGET_UNITY_VERSION 2022.3.4f1)
+
 add_subdirectory(c_cpp)
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")

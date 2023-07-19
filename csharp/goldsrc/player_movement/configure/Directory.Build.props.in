@@ -1,0 +1,6 @@
+<!-- Directory.Build.props -->
+<Project>
+	<PropertyGroup>
+		<UnityVersion>@TARGET_UNITY_VERSION@</UnityVersion>
+	</PropertyGroup>
+</Project>
